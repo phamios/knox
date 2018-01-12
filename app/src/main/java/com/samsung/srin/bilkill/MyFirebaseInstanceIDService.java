@@ -32,4 +32,7 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         RegisterUtil reg = new RegisterUtil();
         reg.setMessageCode(getApplicationContext(),token);
     }
+
+
+
 }

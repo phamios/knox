@@ -81,13 +81,15 @@
         </receiver>
 
         <!-- [START firebase_service] -->
-        <service
-            android:name=".MyFirebaseMessagingService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-            </intent-filter>
 
-        </service>
+        <receiver android:name=".service.NotificationReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </receiver>
+
+
 
         <service android:name=".service.NotificationService">
             <intent-filter>

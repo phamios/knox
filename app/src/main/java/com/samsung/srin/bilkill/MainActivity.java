@@ -8,12 +8,15 @@ import android.app.enterprise.SecurityPolicy;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.Toast;
 
 import com.samsung.srin.bilkill.controller.PolicyController;
+import com.samsung.srin.bilkill.service.NotificationReceiver;
 import com.samsung.srin.bilkill.service.PolicyService;
 import com.samsung.srin.bilkill.util.CommonUtil;
 
@@ -40,6 +43,7 @@ public class MainActivity extends Activity implements PolicyController.LicenseAc
                 .setView(inflater.inflate(R.layout.progress_dialog, null))
                 .create();
         PolicyController.getInstance(this).activateAdmin(this, this);
+
     }
 
     @Override

@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "168007495891",
+    "firebase_url": "https://samsungknox-e8b00.firebaseio.com",
+    "project_id": "samsungknox-e8b00",
+    "storage_bucket": "samsungknox-e8b00.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:168007495891:android:71619fb0df403a25",
+        "android_client_info": {
+          "package_name": "net.vingroup.redsun.vinknox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "168007495891-coe3kt8olmr8vv5194udqk401p7rvg0s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqeifuMXGffw29CSETOu5mKXj0MHonEb0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:168007495891:android:c26696af6be2b20a",
+        "android_client_info": {
+          "package_name": "com.samsung.srin.bilkill"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "168007495891-coe3kt8olmr8vv5194udqk401p7rvg0s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqeifuMXGffw29CSETOu5mKXj0MHonEb0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

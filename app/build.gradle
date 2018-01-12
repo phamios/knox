@@ -1,0 +1,53 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion '25.0.0'
+    defaultConfig {
+        applicationId "com.samsung.srin.bilkill"
+        minSdkVersion 19
+        targetSdkVersion 19
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        jackOptions {
+            enabled true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    productFlavors {
+    }
+
+
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile files('libs/edm.jar')
+    compile files('libs/rc.jar')
+    compile files('libs/gson-2.3.1.jar')
+    compile 'com.squareup.okhttp:okhttp:2.3.0'
+    //compile files('libs/okhttp-2.3.0.jar')
+    compile 'com.android.support:support-v4:22.0.0'
+    //    compile 'com.google.firebase:firebase-core:11.8.0'
+    compile 'com.google.firebase:firebase-core:9.6.0'
+    compile 'com.google.firebase:firebase-messaging:9.6.0'
+    compile files('libs/knox.jar')
+    compile files('libs/license.jar')
+}
+
+
+apply plugin: 'com.google.gms.google-services'

@@ -1,0 +1,18 @@
+<resources>
+<string name="app_name">VINGROUP KNOX</string>
+<string name="enterprise_device_admin">Vingroup Device Control</string>
+<string name="enterprise_device_admin_description">Vingroup Device Control</string>
+<string name="lock_message">Your Phone is locked by Admin</string>
+<!--<string name="server_uri">http://10.111.176.51:9100/vincommerce/apidevice</string>-->
+<string name="server_uri">https://simapi.vingroup.net/vincommerce/apidevice</string>
+<string name="register_uri">%s/setupdevice</string>
+<string name="sync_request_uri">%s/updatedevicetoken</string>
+<string name="sync_result_uri">%s/GetDeviceInfo</string> <!--checkpolicy -->
+<string name="confirm_status_devices">%s/updatestatusdevice</string>
+<string name="loc_update_uri">%s/updatelocation</string>
+<string name="elm_key_uri">%s/GetKnoxLicenceKey</string>
+<string name="preference_file_key">com.samsung.srin.billkill.SHARED_PREF_KEY</string>
+<string name="registerkey">7AAB4DE4B50435CE3A4D3FCA1122632E15A805D1B6059D7EE4045AFAD298C07B0011FAAF17ADEBCEEB3EC17B05A0EE09638A87E2781F347BDAEAE74B4C1CAA40</string>
+<string name="elm_activated_succesfully">ELM activated successfully</string>
+<string name="clientid_token"></string>
+</resources>

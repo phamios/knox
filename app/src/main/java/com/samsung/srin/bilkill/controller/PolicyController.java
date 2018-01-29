@@ -302,6 +302,22 @@ public class PolicyController {
         return false;
     }
 
+    public boolean unlockDevice(String password){
+        Log.w(TAG, "unlock device");
+        try {
+            // check password is a number (pin)
+            if (Integer.parseInt(password) >= 0) {
+                mEDM.getSecurityPolicy().unlockCredentialStorage(password);
+                return true;
+            }
+        } catch (Exception e) {
+            Log.w(TAG, "Exception: " + e);
+        }
+
+        return false;
+
+    }
+
     public boolean removeLockout() {
         Log.w(TAG, "remove lock device");
         try {

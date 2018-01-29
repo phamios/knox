@@ -54,7 +54,6 @@ public class MainActivity extends Activity implements PolicyController.LicenseAc
     @Override
     public void onActivationSuccess() {
 
-
         // activate default policy
         PolicyController.getInstance(this).enableDeviceAdmin(true);
 //        PolicyController.getInstance(this).disableFactoryReset(true);
@@ -100,7 +99,7 @@ public class MainActivity extends Activity implements PolicyController.LicenseAc
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         setIntent(intent);
-        Intent intent_o = getIntent();
+//        Intent intent_o = getIntent();
     }
 
     @Override

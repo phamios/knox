@@ -42,9 +42,13 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.3.0'
     //compile files('libs/okhttp-2.3.0.jar')
     compile 'com.android.support:support-v4:22.0.0'
+
     //    compile 'com.google.firebase:firebase-core:11.8.0'
     compile 'com.google.firebase:firebase-core:9.6.0'
     compile 'com.google.firebase:firebase-messaging:9.6.0'
+//    compile 'com.google.firebase:firebase-core:11.8.0'
+//    compile 'com.google.firebase:firebase-messaging:11.8.0'
+
     compile files('libs/knox.jar')
     compile files('libs/license.jar')
 }

@@ -15,4 +15,5 @@
 <string name="registerkey">7AAB4DE4B50435CE3A4D3FCA1122632E15A805D1B6059D7EE4045AFAD298C07B0011FAAF17ADEBCEEB3EC17B05A0EE09638A87E2781F347BDAEAE74B4C1CAA40</string>
 <string name="elm_activated_succesfully">ELM activated successfully</string>
 <string name="clientid_token"></string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
 </resources>

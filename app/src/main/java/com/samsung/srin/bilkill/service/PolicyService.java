@@ -7,6 +7,7 @@ import android.os.Build;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.samsung.srin.bilkill.HttpClient;
@@ -30,6 +31,7 @@ public class PolicyService extends IntentService {
     private static final String TAG = PolicyService.class.getCanonicalName();
     
     private static final String KEY_DEVICE_ID        = "device_id";
+    private static final String KEY_DEVICE_IMEI      = "IMEI";
     private static final String KEY_DEVICE_TIMESTAMP = "device_last_update";
     private static final String KEY_DEVICE_LOCK      = "device_lock";
     private static final String KEY_DEVICE_LOCK_MSG  = "device_lock_msg";
@@ -37,6 +39,8 @@ public class PolicyService extends IntentService {
     private static final String KEY_DEVICE_TRACK     = "device_track";
     private static final String KEY_DEVICE_NOTIF     = "device_notification";
     private static final String KEY_DEVICE_ADMIN     = "disable_device_admin";
+
+
 
     public PolicyService() {
         super("PolicyService");
@@ -49,11 +53,13 @@ public class PolicyService extends IntentService {
         //-============================================================k=====
         // GET DEVICE ID
         String deviceId = Settings.Secure.getString(getContentResolver(),  Settings.Secure.ANDROID_ID);
-        deviceId = FirebaseInstanceId.getInstance().getToken();
+//        deviceId = FirebaseInstanceId.getInstance().getToken();
+
 
         // GET IMEI NUMBER
         TelephonyManager tManager = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
         String deviceIMEI = tManager.getDeviceId();
+
 
         String model = Build.MODEL;
         String osversion = Build.MANUFACTURER
@@ -71,6 +77,8 @@ public class PolicyService extends IntentService {
         } else {
             try {
                 String response = sendFireBaseToken();//sendSyncRequest();
+                //Sync with server to get current status of this devices
+                getStatusServer();
                 if(response.isEmpty()) return;
 
                 Log.d(TAG, "sync response : "+ response);
@@ -125,23 +133,48 @@ public class PolicyService extends IntentService {
         return HttpClient.getInstance().post(getApplicationContext(),url, jsonRequest.toString());
     }
 
-//    private void getStatusServer() throws  IOException{
-//        JSONObject jsonRequest = new JSONObject();
-//
-//        try {
-//            jsonRequest.put(KEY_DEVICE_ID, RegisterUtil.getRegistrationId(this));
-//            jsonRequest.put(KEY_DEVICE_TIMESTAMP, timestamp);
-//        }catch (JSONException e){
-//            Log.e(TAG, "JSON Exception", e);
-//        }
-//
-//        String url = getSyncResultUrl(this);
-//
-//        Log.d(TAG, "Post request to : " + url);
-//        Log.d(TAG, "json : " + jsonRequest.toString());
-//
-//        HttpClient.getInstance().post(getApplicationContext(),url, jsonRequest.toString());
-//    }
+    private void getStatusServer() throws  IOException{
+        JSONObject jsonRequest = new JSONObject();
+
+        try {
+            TelephonyManager tManager = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
+            String imeiID = tManager.getDeviceId();
+            jsonRequest.put(KEY_DEVICE_IMEI,imeiID);
+
+            String url_info = getSyncResultUrl(this);
+
+            Log.d(TAG, "Post request to : " + url_info);
+            Log.d(TAG, "json :  " + jsonRequest.toString());
+
+            String respond = HttpClient.getInstance().post(getApplicationContext(),url_info, jsonRequest.toString());
+
+            JSONObject reader = new JSONObject(respond);
+            JSONObject dataRespond  = reader.getJSONObject("Data");
+            JSONObject jsonObj = new JSONObject(dataRespond.toString());
+            if(Integer.parseInt(jsonObj.getString("LockDevice")) == 1 || Integer.parseInt(jsonObj.getString("LockWarranty")) == 1){
+//                PolicyController.getInstance(this).disableFactoryReset(true);
+//                PolicyController.getInstance(this).disableApplicationClearData(true, getPackageName());
+//                PolicyController.getInstance(this).disableUninstallApplication(true, getPackageName());
+                PolicyController.getInstance(this).lockoutDevice("123456","Ahihi Hacked !!!","0916262170");
+            }
+            if(Integer.parseInt(jsonObj.getString("LockDevice")) == 0 || Integer.parseInt(jsonObj.getString("LockWarranty")) == 0){
+                PolicyController.getInstance(this).unlockDevice("123456");
+                PolicyController.getInstance(this).removeLockout();
+            }
+
+
+
+            Log.d("LockDevice",jsonObj.getString("LockDevice"));
+            Log.d("DisabledKnox",jsonObj.getString("DisabledKnox"));
+            Log.d("LockWarranty",jsonObj.getString("LockWarranty"));
+
+        }catch (JSONException e){
+            Log.e(TAG, "JSON Exception", e);
+            Toast.makeText(this, "Lỗi kết nối, kiểm tra lại mạng 3G/4G hoặc wifi", Toast.LENGTH_SHORT).show();
+        }
+
+
+    }
 
     private void sendSyncResult(String timestamp) throws IOException {
         JSONObject jsonRequest = new JSONObject();
